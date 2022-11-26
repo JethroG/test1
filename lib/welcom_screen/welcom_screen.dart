@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:test_for_test/sign_in_screen/sign_in_screen.dart';
 import 'package:test_for_test/utils/color_scheme.dart';
 import 'package:test_for_test/utils/size_box_set.dart';
 import 'package:test_for_test/utils/text_fonts.dart';
+
+import '../sign_in_screen/bloc/auth_bloc.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -23,9 +27,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             width: MediaQuery.of(context).size.width,
             fit: BoxFit.cover,
           ),
-      Scaffold(
+          Scaffold(
         backgroundColor: Colors.transparent,
-        bottomNavigationBar: Container(
+        bottomNavigationBar:
+        Container(
             color: primaryBlueDark,
             margin: EdgeInsets.fromLTRB(16, 0, 16, 36),
             padding: EdgeInsets.all(16),
@@ -80,7 +85,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           fontWeight: FontWeight.w400),
                     ),
                     TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Route route = MaterialPageRoute(
+                            builder: (_) => BlocProvider<AuthBloc>.value(
+                              value: AuthBloc(),
+                              child: const SignInScreen(),
+                            ),
+                          );
+                          Navigator.pushReplacement(context, route);
+                        },
                         child: Text(
                           'Sign in first',
                           style: latoRegularTextStyle.copyWith(

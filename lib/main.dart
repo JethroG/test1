@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:test_for_test/splash_screen.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:test_for_test/utils/color_scheme.dart';
 import 'package:test_for_test/welcom_screen/welcom_screen.dart';
 
-void main() {
+Future<void> main() async {
+  await Future.delayed(const Duration(seconds: 2))
+      .then((value) => FlutterNativeSplash.remove());
   runApp(const MyApp());
 }
 
@@ -16,7 +18,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(),
-      home: const SplashScreen(),
+      home: const WelcomeScreen(),
     );
   }
 }
