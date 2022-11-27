@@ -16,7 +16,8 @@ class WelcomeScreenWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
+    return
+      BlocProvider(
         create: (context) => GoToSignInScreenBloc(),
         child: BlocConsumer<GoToSignInScreenBloc, GoToSignInScreenState>(listener: (context, state) {
           log('$state');
