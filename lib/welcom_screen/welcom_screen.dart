@@ -22,7 +22,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       Stack(
         children: <Widget>[
           Image.asset(
-            "assets/graphics/SB-Headers-06-1024x399-new-1.jpg",
+            "assets/graphics/back.png",
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             fit: BoxFit.cover,

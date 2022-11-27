@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:test_for_test/my_collection_screen/my_collection_screen.dart';
+import 'package:test_for_test/bottom_navigation_bar_pages/my_collection_screen/bloc/my_collection_bloc.dart';
 import 'package:test_for_test/utils/color_scheme.dart';
 import 'package:test_for_test/utils/size_box_set.dart';
 import 'package:test_for_test/utils/text_fonts.dart';
 import 'package:test_for_test/welcom_screen/welcom_screen.dart';
-
+import '../main_screen/main_screen_navigation.dart';
 import 'bloc/auth_bloc.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -68,8 +68,13 @@ class _SignInScreenState extends State<SignInScreen> {
             } else if (state is AuthLoaded) {
               clearTextData();
               Route route = MaterialPageRoute(
-                  builder: (context) => const MyCollectionScreen());
+                builder: (_) => BlocProvider<MyCollectionBloc>.value(
+                  value: MyCollectionBloc(),
+                  child: const MainScreenNavigation(),
+                ),
+              );
               Navigator.pushReplacement(context, route);
+
             }
           },
           builder: (context, state) {
@@ -81,12 +86,17 @@ class _SignInScreenState extends State<SignInScreen> {
                     child: Container(
                       width: double.infinity,
                       height: double.infinity,
-                      color: Colors.grey.withOpacity(0.01),
+                      color: Colors.grey.withOpacity(0.60),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          CircularProgressIndicator(),
-                          Text("Loading..."),
+                        children:  [
+                          CircularProgressIndicator(color: primaryBlueDark,),
+                          SizedBox(width: 16,),
+                          Text("Loading...",style: latoRegularTextStyle.copyWith(
+                            color: primaryBlueDark,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 16
+                          ),),
                         ],
                       ),
                     ),
@@ -131,11 +141,11 @@ class _SignInScreenState extends State<SignInScreen> {
                           color: primaryYellow,
                           fontSize: 12,
                           fontWeight: FontWeight.w400),
-                      enabledBorder: UnderlineInputBorder( //<-- SEE HERE
+                      enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
                             width: 3, color: primaryYellow),
                       ),
-                      focusedBorder: UnderlineInputBorder( //<-- SEE HERE
+                      focusedBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
                             width: 3, color: primaryYellow),
                       ),
@@ -166,11 +176,11 @@ class _SignInScreenState extends State<SignInScreen> {
                           color: primaryYellow,
                           fontSize: 12,
                           fontWeight: FontWeight.w400),
-                      enabledBorder: UnderlineInputBorder( //<-- SEE HERE
+                      enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
                             width: 3, color: primaryYellow),
                       ),
-                      focusedBorder: UnderlineInputBorder( //<-- SEE HERE
+                      focusedBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
                             width: 3, color: primaryYellow),
                       ),
