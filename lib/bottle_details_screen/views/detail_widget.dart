@@ -1,206 +1,81 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_for_test/utils/size_box_set.dart';
 import 'package:test_for_test/utils/text_fonts.dart';
+
+import '../../utils/color_scheme.dart';
+import '../bloc_detail_view/detail_view_bloc.dart';
+import '../models/details_view_model.dart';
 
 class DetailsBottleWidget extends StatelessWidget {
   const DetailsBottleWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment:CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('Distillery',style: latoRegularTextStyle.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.w400,
-                fontSize: 16
-              ),),
-              Text('Text',style: latoRegularTextStyle.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16
-              ),),
+    return
 
-            ],
-          ),
-          sizeHeight32,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('Region',style: latoRegularTextStyle.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16
-              ),),
-              Text('Text',style: latoRegularTextStyle.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16
-              ),),
+          Container(child:
+          _body());
 
-            ],
-          ),
-          sizeHeight32,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('Country',style: latoRegularTextStyle.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16
-              ),),
-              Text('Text',style: latoRegularTextStyle.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16
-              ),),
 
-            ],
-          ),
-          sizeHeight32,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('Type',style: latoRegularTextStyle.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16
-              ),),
-              Text('Text',style: latoRegularTextStyle.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16
-              ),),
 
-            ],
-          ),
-          sizeHeight32,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('Age statement',style: latoRegularTextStyle.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16
-              ),),
-              Text('Text',style: latoRegularTextStyle.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16
-              ),),
+  }
+  _body() {
+    return BlocBuilder<DetailViewBloc, DetailViewState>(
+        builder: (BuildContext context, DetailViewState state) {
+          log(' details ${state}');
+          if (state is DetailsDataLoadedState) {
+            List<DetailsViewModel> albums = state.data;
+            log('$albums');
+            return _list(albums);
+          } else {
+            return Container(
+              color: primaryYellow,
+              child: Text(''),
+            );
+          }
+        });
+  }
 
-            ],
-          ),
-          sizeHeight32,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('Filled',style: latoRegularTextStyle.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16
-              ),),
-              Text('Text',style: latoRegularTextStyle.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16
-              ),),
+  Widget _list(List<DetailsViewModel> albums) {
+    return Expanded(
+        child: ListView.builder(
+            shrinkWrap: true,
+            scrollDirection: Axis.vertical,
+            itemCount: albums.length,
+            itemBuilder: (ctx, index) {
+              return GestureDetector(
+                  onTap: () {
+                      log('tap on item');
+                  },
+                  child: Container(
+                    margin: EdgeInsets.fromLTRB(0, 0, 0, 16),
+                    child:
+                        Row(
+                          mainAxisAlignment:MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                                child: Text(albums[index].title.toString(),
+                                    style: eBGaramondRegularTextStyle.copyWith(
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.white,
+                                    ),
+                                    textAlign: TextAlign.left)),
+                            Expanded(
+                                child: Text(albums[index].desc.toString(),
+                                    style: eBGaramondRegularTextStyle.copyWith(
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.white,
+                                    ),
+                                    textAlign: TextAlign.right)),
+                          ],
+                        )
 
-            ],
-          ),
-          sizeHeight32,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('Bottled',style: latoRegularTextStyle.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16
-              ),),
-              Text('Text',style: latoRegularTextStyle.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16
-              ),),
-
-            ],
-          ),
-          sizeHeight32,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('Cask number',style: latoRegularTextStyle.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16
-              ),),
-              Text('Text',style: latoRegularTextStyle.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16
-              ),),
-
-            ],
-          ),
-          sizeHeight32,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('ABV',style: latoRegularTextStyle.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16
-              ),),
-              Text('Text',style: latoRegularTextStyle.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16
-              ),),
-
-            ],
-          ),
-          sizeHeight32,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('Size',style: latoRegularTextStyle.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16
-              ),),
-              Text('Text',style: latoRegularTextStyle.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16
-              ),),
-
-            ],
-          ),
-          sizeHeight32,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('Finish',style: latoRegularTextStyle.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16
-              ),),
-              Text('Text',style: latoRegularTextStyle.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16
-              ),),
-
-            ],
-          ),
-          sizeHeight32,
-        ],
-      ),
-    );
+                  ));
+            }));
   }
 }
