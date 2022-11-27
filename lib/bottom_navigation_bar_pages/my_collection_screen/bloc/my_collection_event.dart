@@ -8,4 +8,8 @@ class GetListOfMyCollectionEvent extends MyCollectionEvent{
   GetListOfMyCollectionEvent();
 }
 
+class NavigateToBottleDetailsScreenEvent extends MyCollectionEvent{
+  NavigateToBottleDetailsScreenEvent();
+}
+
 

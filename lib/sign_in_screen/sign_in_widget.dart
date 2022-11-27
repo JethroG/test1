@@ -31,8 +31,13 @@ class _SignInScreenWidgetState extends State<SignInScreenWidget> {
     usernameFocus = FocusNode();
     passwordFocus = FocusNode();
     loginBtnFocus = FocusNode();
+
+
     userName = TextEditingController();
     password = TextEditingController();
+
+    userName.text='test@gmail.com';
+    password.text='12345678';
   }
 
   @override

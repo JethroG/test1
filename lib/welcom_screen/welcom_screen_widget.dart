@@ -104,13 +104,6 @@ class WelcomeScreenWidget extends StatelessWidget {
                                     context
                                         .read<GoToSignInScreenBloc>()
                                         .add(OpenSignInScreenEvent());
-                                    // Route route = MaterialPageRoute(
-                                    //   builder: (_) => BlocProvider<AuthBloc>.value(
-                                    //     value: AuthBloc(),
-                                    //     child: const SignInScreen(),
-                                    //   ),
-                                    // );
-                                    // Navigator.pushReplacement(context, route);
                                   },
                                   child: Text(
                                     'Sign in first',

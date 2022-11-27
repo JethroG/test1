@@ -10,5 +10,8 @@ class MyCollectionInitial extends MyCollectionState {
   final List<GlassModel> data;
   MyCollectionInitial({required this.data});
 }
+class NavigateToBottleDetailsScreenState extends MyCollectionState {
+  NavigateToBottleDetailsScreenState();
+}
 
 
