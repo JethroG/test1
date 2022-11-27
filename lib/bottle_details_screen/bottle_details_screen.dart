@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:test_for_test/bottle_details_screen/bloc_detail_view/detail_view_bloc.dart';
+import 'package:test_for_test/bottle_details_screen/bloc_tasting_note/tasting_note_bloc.dart';
 import 'package:test_for_test/bottle_details_screen/views/bottle_details_widget.dart';
 import 'package:test_for_test/bottle_details_screen/views/detail_widget.dart';
 import 'package:test_for_test/bottle_details_screen/views/history_widget.dart';
@@ -16,18 +17,15 @@ const String _close = 'assets/graphics/icon-button.svg';
 final Widget _closeSvg = SvgPicture.asset(_close);
 
 class BottleDetailsScreen extends StatefulWidget {
-   BottleDetailsScreen({Key? key,required this.title}) : super(key: key);
+  BottleDetailsScreen({Key? key, required this.title}) : super(key: key);
 
-   String title;
+  String title;
 
   @override
   State<BottleDetailsScreen> createState() => _BottleDetailsScreenState();
 }
 
-class _BottleDetailsScreenState extends State<BottleDetailsScreen>
-   {
-
-
+class _BottleDetailsScreenState extends State<BottleDetailsScreen> {
   @override
   initState() {
     // TODO: implement initState
@@ -37,17 +35,30 @@ class _BottleDetailsScreenState extends State<BottleDetailsScreen>
   @override
   void dispose() {
     super.dispose();
-
   }
-
 
   @override
   Widget build(BuildContext context) {
-    final bloc = DetailViewBloc()
-      ..add(GetDetailsDataEvent());
-    return BlocProvider<DetailViewBloc>(
-        create: (context) => bloc,
-    child: BottleDetailsWidget(title: widget.title,));
+    final blocDetail = DetailViewBloc()..add(GetDetailsDataEvent());
+    final blocTasting = TastingNoteBloc()..add(GetTastingNoteDataEvent());
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<DetailViewBloc>(
+            create: (context) => blocDetail,
+            child: BottleDetailsWidget(
+              title: widget.title,
+            )),
+        BlocProvider<TastingNoteBloc>(
+            create: (context) => blocTasting,
+            child: BottleDetailsWidget(
+              title: widget.title,
+            )),
+      ],
+      child: MaterialApp(
+        home: BottleDetailsWidget(
+          title: widget.title,
+        ),
+      ),
+    );
   }
-
 }

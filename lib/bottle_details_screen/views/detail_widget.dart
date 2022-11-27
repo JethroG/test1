@@ -16,8 +16,8 @@ class DetailsBottleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return
 
-          Container(child:
-          _body());
+
+          _body();
 
 
 
@@ -40,8 +40,7 @@ class DetailsBottleWidget extends StatelessWidget {
   }
 
   Widget _list(List<DetailsViewModel> albums) {
-    return Expanded(
-        child: ListView.builder(
+    return  ListView.builder(
             shrinkWrap: true,
             scrollDirection: Axis.vertical,
             itemCount: albums.length,
@@ -76,6 +75,6 @@ class DetailsBottleWidget extends StatelessWidget {
                         )
 
                   ));
-            }));
+            });
   }
 }

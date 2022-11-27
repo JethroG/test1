@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:test_for_test/bottle_details_screen/bloc_detail_view/detail_view_bloc.dart';
+import 'package:test_for_test/bottle_details_screen/bloc_tasting_note/tasting_note_bloc.dart';
 import 'package:test_for_test/bottle_details_screen/models/details_view_model.dart';
 import 'package:test_for_test/bottle_details_screen/views/detail_widget.dart';
 import 'package:test_for_test/bottle_details_screen/views/history_widget.dart';
@@ -40,12 +41,17 @@ class _BottleDetailsWidgetState extends State<BottleDetailsWidget>
     _tabController.addListener(() {
 
       _loadListOfDetailsData();
+      _loadListOfTastingNoteData();
     });
 
   }
   _loadListOfDetailsData() async {
     BlocProvider.of<DetailViewBloc>(context)
         .add(GetDetailsDataEvent());
+  }
+  _loadListOfTastingNoteData() async {
+    BlocProvider.of<TastingNoteBloc>(context)
+        .add(GetTastingNoteDataEvent());
   }
 
   @override
