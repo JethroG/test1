@@ -46,7 +46,8 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return
+      Scaffold(
         backgroundColor: primaryBlue,
         appBar: AppBar(
           backgroundColor: primaryBlue,
@@ -68,11 +69,7 @@ class _SignInScreenState extends State<SignInScreen> {
             } else if (state is AuthLoaded) {
               clearTextData();
               Route route = MaterialPageRoute(
-                builder: (_) => BlocProvider<MyCollectionBloc>.value(
-                  value: MyCollectionBloc(),
-                  child: const MainScreenNavigation(),
-                ),
-              );
+                  builder: (context) => const MainScreenNavigation());
               Navigator.pushReplacement(context, route);
 
             }

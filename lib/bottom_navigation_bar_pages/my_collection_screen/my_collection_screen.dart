@@ -34,8 +34,11 @@ class _MyCollectionScreenState extends State<MyCollectionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return
-      Scaffold(
+    final bloc = MyCollectionBloc()..add(GetListOfMyCollectionEvent());
+    return BlocProvider<MyCollectionBloc>(
+        create: (context) => bloc,
+    child:
+    Scaffold(
         backgroundColor: primaryBlue,
         body: Container(
             margin: EdgeInsets.all(16),
@@ -76,7 +79,7 @@ class _MyCollectionScreenState extends State<MyCollectionScreen> {
                 _body(),
               ],
             )),
-      );
+      ));
   }
 
   _body() {
